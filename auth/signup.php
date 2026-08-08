@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_bind_param($insertQuery, "ssss", $name, $email, $phone, $hashedPassword);
 
             if (mysqli_stmt_execute($insertQuery)) {
-                header("Location: login.php?registered=1");
+                header("Location: user_login.php?registered=1");
                 exit();
             } else {
                 $error = "Something went wrong. Please try again.";
