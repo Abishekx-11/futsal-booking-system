@@ -77,7 +77,7 @@ INSERT INTO time_slots (start_time, end_time) VALUES
 ('19:00:00', '20:00:00');
 
 INSERT INTO admins (name, email, password) VALUES
-('Venue Admin', 'admin2futsal@gmail.com', '$2b$10$S433N3DJtIBXunj7qS8kj.4pcWcEebcR3rx2ugEWQwqqsjPTBJA2K');
+('Court Admin', 'admin2futsal@gmail.com', '$2b$10$S433N3DJtIBXunj7qS8kj.4pcWcEebcR3rx2ugEWQwqqsjPTBJA2K');
 
 INSERT INTO courts (court_name, price_per_hour) VALUES
 ('Court A', 1200.00),

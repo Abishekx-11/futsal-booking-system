@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="form-container">
-        <h2>Venue Admin Login</h2>
+        <h2>Court Admin Login</h2>
 
         <?php if ($error != "") { ?>
             <p class="error-message"><?php echo htmlspecialchars($error); ?></p>
