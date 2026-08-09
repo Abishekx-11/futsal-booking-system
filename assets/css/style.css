@@ -1,0 +1,133 @@
+/* index.php - landing page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: whitesmoke;
+    color: black;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: green;
+}
+
+.landing-container {
+    text-align: center;
+    padding-top: 80px;
+}
+
+.role-buttons {
+    margin-top: 30px;
+}
+
+.role-button {
+    background-color: green;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    margin: 10px;
+    display: inline-block;
+}
+
+.role-button:hover {
+    background-color: darkgreen;
+}
+
+/* auth/signup.php, auth/user_login.php, auth/admin_login.php - form pages */
+.form-container {
+    width: 350px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 40px;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+}
+
+.form-container h2 {
+    text-align: center;
+}
+
+.form-container label {
+    display: block;
+    margin-top: 12px;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.form-container button:hover {
+    background-color: darkgreen;
+}
+
+.form-container p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* error and success messages used inside form pages */
+.error-message {
+    background-color: mistyrose;
+    color: darkred;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.success-message {
+    background-color: honeydew;
+    color: darkgreen;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* includes/header.php and includes/footer.php - used on every page */
+.site-header {
+    background-color: green;
+    color: white;
+    padding: 15px;
+}
+
+.site-header .logo {
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.site-header nav {
+    float: right;
+}
+
+.site-header nav a {
+    color: white;
+    margin-left: 15px;
+}
+
+.page-content {
+    padding: 20px;
+    flex: 1;
+}
+
+.site-footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 12px;
+}
