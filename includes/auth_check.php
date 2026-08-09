@@ -3,7 +3,11 @@ session_start();
 
 function requireLogin($requiredRole) {
     if (!isset($_SESSION['role']) || $_SESSION['role'] != $requiredRole) {
-        header("Location: /futsal-booking-system/auth/login.php");
+        if ($requiredRole == 'admin') {
+            header("Location: /futsal-booking-system/auth/admin_login.php");
+        } else {
+            header("Location: /futsal-booking-system/auth/user_login.php");
+        }
         exit();
     }
 }
