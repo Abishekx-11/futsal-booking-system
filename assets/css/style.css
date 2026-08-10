@@ -131,3 +131,34 @@ a {
     text-align: center;
     padding: 12px;
 }
+
+
+
+/* admin/manage_courts.php - courts table */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.data-table th, .data-table td {
+    border: 1px solid lightgray;
+    padding: 10px;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: green;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
