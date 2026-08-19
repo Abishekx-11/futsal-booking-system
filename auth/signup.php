@@ -9,8 +9,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = trim($_POST['phone']);
     $password = $_POST['password'];
 
-    if ($name == "" || $email == "" || $password == "") {
+    if ($name == "" || $email == "" || $phone == "" || $password == "") {
         $error = "Please fill all required fields.";
+    } elseif (!preg_match('/^[a-zA-Z0-9._%+-]+@gmail\.com$/', $email)) {
+        $error = "Please enter a valid Gmail address.";
+    } elseif (!preg_match('/^(97|98)[0-9]{8}$/', $phone)) {
+        $error = "Please enter a valid Nepali phone number.";
     } else {
         $emailQuery = mysqli_prepare($conn, "SELECT user_id FROM users WHERE email = ?");
         mysqli_stmt_bind_param($emailQuery, "s", $email);
@@ -22,8 +26,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            $insertQuery = mysqli_prepare($conn, "INSERT INTO users (name, email, phone_number, password) VALUES (?, ?, ?, ?)");
-            mysqli_stmt_bind_param($insertQuery, "ssss", $name, $email, $phone, $hashedPassword);
+            $insertQuery = mysqli_prepare(
+                $conn,
+                "INSERT INTO users (name, email, phone_number, password)
+                 VALUES (?, ?, ?, ?)"
+            );
+
+            mysqli_stmt_bind_param(
+                $insertQuery,
+                "ssss",
+                $name,
+                $email,
+                $phone,
+                $hashedPassword
+            );
 
             if (mysqli_stmt_execute($insertQuery)) {
                 header("Location: user_login.php?registered=1");
@@ -35,8 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -60,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="email" name="email" required>
 
             <label>Phone Number</label>
-            <input type="text" name="phone">
+            <input type="text" name="phone" required>
 
             <label>Password</label>
             <input type="password" name="password" required>
@@ -68,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit">Sign Up</button>
         </form>
 
-        <p>Already have an account? <a href="login.php">Login here</a></p>
+        <p>Already have an account? <a href="user_login.php">Login here</a></p>
     </div>
 </body>
 </html>
