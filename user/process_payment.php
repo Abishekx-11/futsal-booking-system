@@ -82,6 +82,23 @@ if (!$court) {
     exit();
 }
 
+$slotQuery = mysqli_prepare(
+    $conn,
+    "SELECT start_time FROM time_slots WHERE slot_id = ?"
+);
+
+mysqli_stmt_bind_param($slotQuery, "i", $slot_id);
+mysqli_stmt_execute($slotQuery);
+
+$slotResult = mysqli_stmt_get_result($slotQuery);
+$slot = mysqli_fetch_assoc($slotResult);
+
+if (!$slot) {
+    unset($_SESSION['booking_data']);
+    header("Location: book_court.php");
+    exit();
+}
+
 $total_amount = (float) $court['price_per_hour'];
 
 if ($payment_type === 'Advance') {
@@ -90,8 +107,13 @@ if ($payment_type === 'Advance') {
     $remaining_amount = $total_amount - $amount_paid;
     $booking_status = 'Advance Paid';
 
-    $matchDateTime = new DateTime($booking_date);
-    $payment_deadline = $matchDateTime->modify('-24 hours')->format('Y-m-d H:i:s');
+    $matchDateTime = new DateTime(
+        $booking_date . ' ' . $slot['start_time']
+    );
+
+    $payment_deadline = $matchDateTime
+        ->modify('-24 hours')
+        ->format('Y-m-d H:i:s');
 
 } else {
 
