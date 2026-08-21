@@ -79,6 +79,7 @@ CREATE TABLE payments (
         'Paid',
         'Refunded'
     ) NOT NULL DEFAULT 'Pending',
+    refund_amount DECIMAL(10,2) NOT NULL DEFAULT 0.00,
     transaction_reference VARCHAR(100) DEFAULT NULL,
     FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE CASCADE
 );
