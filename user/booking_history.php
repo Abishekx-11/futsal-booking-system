@@ -96,43 +96,48 @@ include '../includes/header.php';
 
                 <td>
 
-                    <?php if (
-                        ($booking['status'] == 'Advance Paid' ||
-                        $booking['status'] == 'Completed')
-                        && time() < $cutoffTime
-                    ) { ?>
+    <?php if ($booking['status'] == 'Advance Paid') { ?>
 
-                        <?php if ($booking['status'] == 'Advance Paid') { ?>
+        <a href="remaining_payment.php?booking_id=<?php echo $booking['booking_id']; ?>">
+            Pay Remaining Amount
+        </a>
 
-                            <a
-                                href="cancel_booking.php?booking_id=<?php echo $booking['booking_id']; ?>"
-                                onclick="return confirm('Are you sure you want to cancel this booking?\n\nYour advance payment is non-refundable. Once cancelled, your booking will be released and this slot may be booked by another user.');"
-                            >
-                                Cancel
-                            </a>
+        <br><br>
 
-                        <?php } elseif ($booking['status'] == 'Completed') { ?>
+        <?php if (time() < $cutoffTime) { ?>
 
-                            <a
-                                href="cancel_booking.php?booking_id=<?php echo $booking['booking_id']; ?>"
-                                onclick="return confirm('Are you sure you want to cancel this booking?\n\nYou will receive a 95% refund of your total payment. A 5% deduction will be applied to cover payment processing and booking administration charges.');"
-                            >
-                                Cancel
-                            </a>
+            <a
+                href="cancel_booking.php?booking_id=<?php echo $booking['booking_id']; ?>"
+                onclick="return confirm('Are you sure you want to cancel this booking?\n\nYour advance payment is non-refundable. Once cancelled, your booking will be released and this slot may be booked by another user.');"
+            >
+                Cancel
+            </a>
 
-                        <?php } ?>
+        <?php } ?>
 
-                    <?php } elseif ($booking['status'] == 'Cancelled') { ?>
+    <?php } elseif (
+        $booking['status'] == 'Completed'
+        && time() < $cutoffTime
+    ) { ?>
 
-                        —
+        <a
+            href="cancel_booking.php?booking_id=<?php echo $booking['booking_id']; ?>"
+            onclick="return confirm('Are you sure you want to cancel this booking?\n\nYou will receive a 95% refund of your total payment. A 5% deduction will be applied to cover payment processing and booking administration charges.');"
+        >
+            Cancel
+        </a>
 
-                    <?php } else { ?>
+    <?php } elseif ($booking['status'] == 'Cancelled') { ?>
 
-                        Cannot cancel
+        —
 
-                    <?php } ?>
+    <?php } else { ?>
 
-                </td>
+        Cannot cancel
+
+    <?php } ?>
+
+</td>
 
             </tr>
 
